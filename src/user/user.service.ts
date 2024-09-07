@@ -3,7 +3,14 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from './entities/user.entity';
-import { Repository } from 'typeorm';
+import {
+  And,
+  FindOptionsWhere,
+  LessThanOrEqual,
+  MoreThan,
+  MoreThanOrEqual,
+  Repository,
+} from 'typeorm';
 
 @Injectable()
 export class UserService {
@@ -49,12 +56,40 @@ export class UserService {
     // });
   }
 
-  async findAll() {
-    return await this.userRepository.find();
+  async findAll(search: string) {
+    const where: FindOptionsWhere<UserEntity> = {};
+    if (search) {
+      const date = new Date();
+      const started_at = new Date(date.setUTCHours(0, 0, 0, 0));
+      const finished_at = new Date(date.setUTCHours(23, 59, 59, 999));
+      where['created_at'] = And(
+        MoreThanOrEqual(started_at),
+        LessThanOrEqual(finished_at),
+      );
+      // where['first_name'] = search;
+    }
+    return await this.userRepository.find({
+      where,
+    });
   }
+  async orderData() {
+    console.log(4564);
+    const data = await this.userRepository.find({
+      where: {},
+      order: { id: 'ASC' },
+    });
+    console.log(data); // Debug: check the response
+
+    return data;
+  }
+  // async findAll() {
+  //   return await this.userRepository.find({
+  //     where: { first_name: ILike('%m%'), age: MoreThan(25) },
+  //   });
+  // }
 
   findOne(id: number) {
-    return `This action returns a #${id} user`;
+    return `This action returns a user with id ${id}`;
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
