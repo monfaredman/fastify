@@ -5,10 +5,10 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from './entities/user.entity';
 import {
-  And,
-  FindOptionsWhere,
-  LessThanOrEqual,
-  MoreThanOrEqual,
+  // And,
+  // FindOptionsWhere,
+  // LessThanOrEqual,
+  // MoreThanOrEqual,
   Repository,
 } from 'typeorm';
 import { isEmail, isNumber } from 'class-validator';
@@ -60,7 +60,7 @@ export class UserService {
     // });
   }
 
-  async findAll(search: string) {
+  async findAll() {
     // const where: FindOptionsWhere<UserEntity> = {};
     // if (search) {
     //   const date = new Date();

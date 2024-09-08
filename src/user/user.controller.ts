@@ -28,8 +28,8 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
   @Get()
-  findAll(@Query('search') search: string) {
-    return this.userService.findAll(search);
+  findAll() {
+    return this.userService.findAll();
   }
   @Get('/order')
   orderData() {
