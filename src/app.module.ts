@@ -1,14 +1,14 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { Module } from "@nestjs/common";
+import { AppController } from "./app.controller";
+import { AppService } from "./app.service";
 // import { TypeOrmModule } from '@nestjs/typeorm';
 // import { UserModule } from './user/user.module';
 // import { BlogModule } from './blog/blog.module';
-import { CustomConfigModule } from './modules/config/configs.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { TypeOrmDbConfig } from './config/typeorm.config';
-import { UserModule } from './modules/user/user.module';
-import { AuthModule } from './modules/auth/auth.module';
+import { CustomConfigModule } from "./modules/config/configs.module";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { TypeOrmDbConfig } from "./config/typeorm.config";
+import { UserModule } from "./modules/user/user.module";
+import { AuthModule } from "./modules/auth/auth.module";
 @Module({
   // imports: [
   //   TypeOrmModule.forRoot({

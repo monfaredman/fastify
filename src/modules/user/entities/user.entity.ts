@@ -6,30 +6,34 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm';
-import { OTPEntity } from './otp.entity';
+} from "typeorm";
+import { OTPEntity } from "./otp.entity";
 
 @Entity()
 export class UserEntity {
-  @PrimaryGeneratedColumn('increment')
+  @PrimaryGeneratedColumn("increment")
   id: number;
-  @Column()
-  first_name: string;
-  @Column()
-  last_name: string;
-  @Column()
-  mobile: number;
   @Column({ nullable: true })
-  mobile_verify: number;
-  @Column()
+  first_name: string;
+  @Column({ nullable: true })
+  last_name: string;
+  @Column({ nullable: true })
+  mobile: string;
+  @Column({ nullable: true })
+  email: string;
+  @Column({ nullable: true })
+  password: string;
+  @Column({ nullable: true })
+  mobile_verify: boolean;
+  @Column({ nullable: true })
   age: number;
   @CreateDateColumn()
   created_at: Date;
   @UpdateDateColumn()
   updated_at: Date;
-  @Column()
+  @Column({ nullable: true })
   otpId: number;
-  @OneToOne(() => UserEntity, (user) => user.otp, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'otpId' })
+  @OneToOne(() => OTPEntity, (otp) => otp.code, { onDelete: "CASCADE" })
+  @JoinColumn({ name: "otpId" })
   otp: OTPEntity;
 }
